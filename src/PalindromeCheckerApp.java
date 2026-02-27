@@ -3,41 +3,40 @@ import java.util.*;
 public class PalindromeCheckerApp{
 
     public static void main(String[] args) {
-//UC11
+//UC12
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Input: ");
         String input = scanner.nextLine();
 
-        PalindromeService service = new PalindromeService();
+        // Inject strategy at runtime
+        PalindromeStrategy strategy = new StackStrategy();
 
-        if (service.checkPalindrome(input)) {
-            System.out.println("Is Palindrome? : true");
-        } else {
-            System.out.println("Is Palindrome? : false");
-        }
+        boolean result = strategy.check(input);
+
+        System.out.println("Is Palindrome?: " + result);
 
         scanner.close();
     }
 
 }
-class PalindromeService {
+interface PalindromeStrategy {
 
-    public boolean checkPalindrome(String input) {
-
-        int start = 0;
-        int end = input.length() - 1;
-
-        while (start < end) {
-
-            if (input.charAt(start) != input.charAt(end)) {
+    boolean check(String input);
+}
+class StackStrategy implements PalindromeStrategy {
+    public boolean check(String input) {
+        java.util.Stack<Character> stack = new java.util.Stack<>();
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
+        for (char c : input.toCharArray()) {
+            if (c != stack.pop()) {
                 return false;
             }
-
-            start++;
-            end--;
         }
 
         return true;
+
     }
 }
