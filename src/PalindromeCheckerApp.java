@@ -1,17 +1,9 @@
 import java.util.*;
-//UC8
+
 public class PalindromeCheckerApp{
-    static class Node {
-        char data;
-        PalindromeCheckerApp.Node next;
 
-        Node(char data) {
-            this.data = data;
-            this.next = null;
-        }
-    }
     public static void main(String[] args) {
-
+//UC9
         String input = "racecar";
 
         UseCase8PalindromeCheckerApp.Node head = buildLinkedList(input);
